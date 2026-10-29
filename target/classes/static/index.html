@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7fb">
+  <title>FinIQ — Financial Audit Intelligence</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <a class="brand" href="#">
+      <span class="brand-logo">F<span>.</span></span>
+      <span>FinIQ<small>FINANCIAL INTELLIGENCE</small></span>
+    </a>
+
+    <div class="nav-label">AUDIT WORKSPACE</div>
+    <a class="nav active" href="#overview"><span>◫</span> Audit overview</a>
+    <a class="nav" href="#upload"><span>⇧</span> New analysis</a>
+    <a class="nav" href="#findings"><span>⌕</span> Findings register</a>
+
+    <div class="sidebar-info">
+      <div class="connection"><span id="connectionDot" class="dot"></span>
+        <div><strong id="connectionLabel">Checking engine</strong><small>Java · Spring Boot</small></div>
+      </div>
+      <div class="version">FINIQ AUDIT ENGINE <b>0.1</b></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">FINANCIAL ASSURANCE / WORKSPACE</p>
+        <h1>Audit intelligence</h1>
+        <p class="muted">Find irregularities. Understand the evidence. Make better decisions.</p>
+      </div>
+      <div class="top-actions">
+        <span class="system-pill"><span class="dot"></span> Local system</span>
+        <button class="btn primary" id="newAuditButton">＋ New audit</button>
+      </div>
+    </header>
+
+    <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+
+    <section class="hero" id="overview">
+      <div class="hero-copy">
+        <p class="eyebrow light">FINANCIAL DATA REVIEW</p>
+        <h2>Clarity in every<br>transaction.</h2>
+        <p>Analyze financial records for duplicate invoices, data quality issues and unusual amounts.</p>
+        <a class="hero-link" href="#upload">Start an audit <span>↗</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="art-core"><span>F</span><i>+</i></div>
+        <div class="float-card float-card-one"><span class="art-check">✓</span> Data validation</div>
+        <div class="float-card float-card-two"><span class="art-alert">!</span> Risk signals</div>
+        <div class="art-caption">ANALYZE · INVESTIGATE · REPORT</div>
+      </div>
+    </section>
+
+    <section class="metrics">
+      <article class="metric">
+        <div class="metric-heading"><span>Records analyzed</span><span class="metric-icon blue">▤</span></div>
+        <div id="totalTransactions" class="metric-value">—</div>
+        <p>Rows in latest audit</p>
+      </article>
+      <article class="metric">
+        <div class="metric-heading"><span>Audit findings</span><span class="metric-icon violet">⌕</span></div>
+        <div id="totalFindings" class="metric-value">—</div>
+        <p>Potential issues detected</p>
+      </article>
+      <article class="metric">
+        <div class="metric-heading"><span>High risk</span><span class="metric-icon red">!</span></div>
+        <div id="highRisk" class="metric-value">—</div>
+        <p>Prioritize for review</p>
+      </article>
+      <article class="metric">
+        <div class="metric-heading"><span>Audit status</span><span class="metric-icon green">✓</span></div>
+        <div id="auditStatus" class="metric-value status-value">READY</div>
+        <p id="statusDescription">Awaiting a data file</p>
+      </article>
+    </section>
+
+    <section class="work-grid">
+      <article class="panel upload-panel" id="upload">
+        <div class="panel-heading">
+          <div><p class="eyebrow">01 / INPUT</p><h2>Run a new audit</h2>
+            <p class="muted">Select your financial transaction file for analysis.</p></div>
+          <span class="heading-icon">↥</span>
+        </div>
+
+        <form id="auditForm">
+          <label id="dropZone" class="drop-zone" for="auditFile">
+            <input id="auditFile" name="file" type="file" accept=".csv,.xlsx,.xlsm" required>
+            <span class="upload-graphic">↑</span>
+            <strong id="fileLabel">Choose a financial data file</strong>
+            <span class="drop-hint">CSV or Excel workbook (.xlsx)</span>
+            <span class="file-limit">MAXIMUM FILE SIZE · 10 MB</span>
+          </label>
+          <button class="btn primary submit-btn" id="auditButton" type="submit">
+            <span>Analyze financial data</span><span>→</span>
+          </button>
+          <div class="form-message" id="message" role="status">Ready to analyze your data.</div>
+        </form>
+      </article>
+
+      <article class="panel coverage-panel">
+        <div class="panel-heading">
+          <div><p class="eyebrow">02 / DETECTION</p><h2>Audit coverage</h2>
+            <p class="muted">Current analysis rules</p></div>
+          <span class="live-label"><span class="dot"></span> Engine rules</span>
+        </div>
+
+        <div class="coverage-item">
+          <span class="coverage-icon purple">⧉</span>
+          <div><strong>Duplicate invoices</strong><p>Matching vendor and invoice reference</p></div>
+          <span class="coverage-check">✓</span>
+        </div>
+        <div class="coverage-item">
+          <span class="coverage-icon amber">⌁</span>
+          <div><strong>Unusual amounts</strong><p>Statistical outlier screening</p></div>
+          <span class="coverage-check">✓</span>
+        </div>
+        <div class="coverage-item">
+          <span class="coverage-icon teal">≋</span>
+          <div><strong>Data quality</strong><p>Missing or invalid transaction fields</p></div>
+          <span class="coverage-check">✓</span>
+        </div>
+        <div class="method-note"><span>i</span><p>Findings are risk indicators for human review, not proof of fraud.</p></div>
+      </article>
+    </section>
+
+    <section class="results-grid">
+      <article class="panel distribution-panel">
+        <div class="panel-heading">
+          <div><p class="eyebrow">03 / RISK PROFILE</p><h2>Finding distribution</h2>
+            <p class="muted">Severity of the latest audit findings</p></div>
+        </div>
+        <div id="riskChart" class="risk-chart">
+          <div class="empty-chart">Run an audit to see your risk profile.</div>
+        </div>
+        <div class="chart-foot"><span>Based on current findings</span><span id="chartTotal">0 findings</span></div>
+      </article>
+
+      <article class="panel summary-panel">
+        <div class="panel-heading">
+          <div><p class="eyebrow">04 / AUDIT SUMMARY</p><h2>Analysis snapshot</h2>
+            <p class="muted">Latest run at a glance</p></div>
+        </div>
+        <div class="summary-row"><span>File analyzed</span><strong id="summaryFile">No file yet</strong></div>
+        <div class="summary-row"><span>Records analyzed</span><strong id="summaryRecords">—</strong></div>
+        <div class="summary-row"><span>Total findings</span><strong id="summaryFindings">—</strong></div>
+        <div class="summary-row"><span>Analysis method</span><strong id="summaryMethod">Rule-based + IQR</strong></div>
+        <div class="report-actions">
+          <button id="exportJson" class="btn secondary" disabled>↓ Export JSON</button>
+          <button id="exportCsv" class="btn secondary" disabled>↓ Export findings CSV</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="panel findings-panel" id="findings">
+      <div class="panel-heading findings-heading">
+        <div><p class="eyebrow">05 / INVESTIGATION</p><h2>Findings register</h2>
+          <p class="muted">Inspect the evidence behind each audit flag.</p></div>
+        <span id="findingsCount" class="count-pill">0 findings</span>
+      </div>
+
+      <div class="table-tools">
+        <label class="search"><span>⌕</span><input id="searchFindings" type="search" placeholder="Search issue, vendor or transaction…"></label>
+        <select id="riskFilter" aria-label="Filter by severity">
+          <option value="ALL">All severities</option>
+          <option value="High">High risk</option>
+          <option value="Medium">Medium risk</option>
+          <option value="Low">Low risk</option>
+        </select>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>TRANSACTION / ROW</th><th>FINDING</th><th>SEVERITY</th><th>EVIDENCE</th></tr></thead>
+          <tbody id="findingRows">
+            <tr><td colspan="4" class="empty-cell">Your findings will appear here after an audit.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-footer"><span id="tableStatus">No audit run yet</span><span>FinIQ · Audit intelligence</span></div>
+    </section>
+
+    <footer class="footer">
+      <span><b>FinIQ</b> · Intelligent Financial Audit &amp; Risk Detection</span>
+      <span>Audit assistance · Human review required</span>
+    </footer>
+  </main>
+</div>
+</body>
+</html>
