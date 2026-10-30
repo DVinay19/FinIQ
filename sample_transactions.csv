@@ -1,0 +1,14 @@
+﻿transaction_id,invoice_id,amount,vendor,transaction_type
+TX001,INV100,120.00,Alpha Stores,Payment
+TX002,INV101,250.00,Beta Supplies,Payment
+TX003,INV102,175.00,Gamma Traders,Refund
+TX004,INV103,310.00,Delta Office,Payment
+TX005,INV104,195.00,Alpha Stores,Payment
+TX006,INV105,420.00,Beta Supplies,Payment
+TX007,INV106,285.00,Gamma Traders,Payment
+TX008,INV107,160.00,Delta Office,Refund
+TX009,INV108,230.00,Alpha Stores,Payment
+TX010,INV109,350.00,Beta Supplies,Payment
+TX011,INV110,99999.00,Gamma Traders,Payment
+TX012,INV100,120.00,Alpha Stores,Payment
+TX013,INV111,,Delta Office,Payment

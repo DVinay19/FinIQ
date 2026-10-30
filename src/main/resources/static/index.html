@@ -1,0 +1,567 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f6fa">
+  <title>FinIQ — Financial Audit Intelligence</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="#overview" data-go-page="overview">
+    <span class="brand-logo">F<span>.</span></span>
+    <span class="brand-name">
+      FinIQ
+      <small>FINANCIAL INTELLIGENCE</small>
+    </span>
+  </a>
+
+  <nav class="top-nav" aria-label="Main navigation">
+    <button class="nav active" data-page="overview" aria-current="page">Overview</button>
+    <button class="nav" data-page="analysis">New analysis</button>
+    <button class="nav" data-page="findings">Findings</button>
+    <button class="nav" data-page="analytics">Analytics</button>
+    <button class="nav" data-page="history">Audit history</button>
+  </nav>
+</header>
+
+<main class="main">
+
+  <div id="notice" class="notice" role="status"
+       aria-live="polite" hidden></div>
+
+  <!-- =================================
+       PAGE 01 — OVERVIEW
+  ================================== -->
+
+  <section class="page-view active" id="page-overview" data-view="overview">
+
+    <header class="page-heading">
+      <div>
+        <p class="eyebrow">FINANCIAL ASSURANCE / WORKSPACE</p>
+        <h1>Audit overview</h1>
+        <p class="muted">
+          Your financial audit workspace. Monitor activity and investigate risks.
+        </p>
+      </div>
+
+      <button class="btn primary" data-go-page="analysis">＋ New audit</button>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow light">FINANCIAL DATA INTELLIGENCE</p>
+        <h2>Clarity in every<br>transaction.</h2>
+        <p>
+          Find irregularities, understand transaction patterns
+          and investigate financial risk with evidence-backed analysis.
+        </p>
+        <button class="hero-link" data-go-page="analysis">
+          Start an audit <span>↗</span>
+        </button>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="art-core">F<i>+</i></div>
+        <div class="float-card float-card-one">✓ Data validation</div>
+        <div class="float-card float-card-two">! Risk signals</div>
+        <div class="art-caption">ANALYZE · INVESTIGATE · REPORT</div>
+      </div>
+    </section>
+
+    <section class="metrics">
+      <article class="metric">
+        <div class="metric-heading">
+          <span>Records analyzed</span>
+          <span class="metric-icon blue">▤</span>
+        </div>
+        <div id="totalTransactions" class="metric-value">—</div>
+        <p>Rows in latest audit</p>
+      </article>
+
+      <article class="metric">
+        <div class="metric-heading">
+          <span>Audit findings</span>
+          <span class="metric-icon violet">⌕</span>
+        </div>
+        <div id="totalFindings" class="metric-value">—</div>
+        <p>Potential issues detected</p>
+      </article>
+
+      <article class="metric">
+        <div class="metric-heading">
+          <span>High risk</span>
+          <span class="metric-icon red">!</span>
+        </div>
+        <div id="highRisk" class="metric-value">—</div>
+        <p>Prioritize for review</p>
+      </article>
+
+      <article class="metric">
+        <div class="metric-heading">
+          <span>Audit status</span>
+          <span class="metric-icon green">✓</span>
+        </div>
+        <div id="auditStatus" class="metric-value status-value">READY</div>
+        <p id="statusDescription">Awaiting a data file</p>
+      </article>
+    </section>
+
+    <section class="overview-grid">
+
+      <article class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">LATEST ACTIVITY</p>
+            <h2>Recent audit snapshot</h2>
+            <p class="muted">Summary of your most recent analysis</p>
+          </div>
+          <span class="heading-icon">◷</span>
+        </div>
+
+        <div class="summary-row">
+          <span>File analyzed</span>
+          <strong id="summaryFile">No file yet</strong>
+        </div>
+        <div class="summary-row">
+          <span>Records analyzed</span>
+          <strong id="summaryRecords">—</strong>
+        </div>
+        <div class="summary-row">
+          <span>Total findings</span>
+          <strong id="summaryFindings">—</strong>
+        </div>
+        <div class="summary-row">
+          <span>Analysis method</span>
+          <strong id="summaryMethod">Audit rules</strong>
+        </div>
+
+        <button class="text-link" data-go-page="analytics">
+          View audit analytics →
+        </button>
+      </article>
+
+      <article class="panel quick-panel">
+        <p class="eyebrow">WORKSPACE SHORTCUTS</p>
+        <h2>What would you like to investigate?</h2>
+
+        <button class="shortcut" data-go-page="analysis">
+          <span class="shortcut-icon blue">↑</span>
+          <span><strong>Start a new analysis</strong><small>Upload financial transaction data</small></span>
+          <span class="shortcut-arrow">→</span>
+        </button>
+
+        <button class="shortcut" data-go-page="findings">
+          <span class="shortcut-icon purple">⌕</span>
+          <span><strong>Investigate findings</strong><small>Review flagged transactions and evidence</small></span>
+          <span class="shortcut-arrow">→</span>
+        </button>
+
+        <button class="shortcut" data-go-page="history">
+          <span class="shortcut-icon teal">◷</span>
+          <span><strong>Open audit history</strong><small>Revisit previously saved reports</small></span>
+          <span class="shortcut-arrow">→</span>
+        </button>
+      </article>
+
+    </section>
+  </section>
+
+
+  <!-- =================================
+       PAGE 02 — NEW ANALYSIS
+  ================================== -->
+
+  <section class="page-view" id="page-analysis" data-view="analysis">
+
+    <header class="page-heading">
+      <div>
+        <p class="eyebrow">FINANCIAL DATA PROCESSING / 01</p>
+        <h1>New analysis</h1>
+        <p class="muted">
+          Upload your transaction data and run the financial audit engine.
+        </p>
+      </div>
+    </header>
+
+    <section class="work-grid">
+
+      <article class="panel upload-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">01 / INPUT</p>
+            <h2>Upload financial records</h2>
+            <p class="muted">Select a CSV or Excel transaction file.</p>
+          </div>
+          <span class="heading-icon">↑</span>
+        </div>
+
+        <form id="auditForm">
+          <label id="dropZone" class="drop-zone" for="auditFile">
+            <input id="auditFile" name="file" type="file"
+                   accept=".csv,.xlsx,.xlsm" required>
+            <span class="upload-graphic">↑</span>
+            <strong id="fileLabel">Choose a financial data file</strong>
+            <span class="drop-hint">CSV or Excel workbook (.xlsx)</span>
+            <span class="file-limit">MAXIMUM FILE SIZE · 10 MB</span>
+          </label>
+
+          <button class="btn primary submit-btn"
+                  id="auditButton" type="submit">
+            <span>Analyze financial data</span>
+            <span>→</span>
+          </button>
+
+          <div class="form-message" id="message" role="status">
+            Ready to analyze your data.
+          </div>
+        </form>
+      </article>
+
+      <article class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">02 / DATA REQUIREMENTS</p>
+            <h2>Expected transaction fields</h2>
+            <p class="muted">Required columns in your uploaded file</p>
+          </div>
+        </div>
+
+        <div class="requirement-list">
+          <div><strong>transaction_id</strong><span>Unique transaction reference</span></div>
+          <div><strong>invoice_id</strong><span>Invoice or bill reference</span></div>
+          <div><strong>amount</strong><span>Positive transaction amount</span></div>
+          <div><strong>vendor</strong><span>Supplier or payee name</span></div>
+          <div><strong>transaction_type</strong><span>Payment or transaction category</span></div>
+        </div>
+
+        <div class="method-note">
+          <span>i</span>
+          <p>Optional date column: transaction_date, transaction_datetime or date. Date-based checks require a recognized date column.</p>
+        </div>
+      </article>
+
+    </section>
+
+    <article class="panel detection-panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">03 / DETECTION ENGINE</p>
+          <h2>Audit detection coverage</h2>
+          <p class="muted">Analysis rules applied to uploaded records</p>
+        </div>
+        <span class="live-label">5 core checks</span>
+      </div>
+
+      <div class="detection-grid">
+
+        <div class="detection-card">
+          <span class="coverage-icon purple">⧉</span>
+          <h3>Duplicate invoices</h3>
+          <p>Matches vendor and invoice references to identify repeated invoice entries.</p>
+        </div>
+
+        <div class="detection-card">
+          <span class="coverage-icon amber">⌁</span>
+          <h3>Unusual amounts</h3>
+          <p>Uses IQR and modified MAD statistical screening to flag amount outliers.</p>
+        </div>
+
+        <div class="detection-card">
+          <span class="coverage-icon teal">≋</span>
+          <h3>Data quality</h3>
+          <p>Checks missing transaction identifiers, amounts, vendors and invoice fields.</p>
+        </div>
+
+        <div class="detection-card">
+          <span class="coverage-icon blue">▥</span>
+          <h3>Vendor exposure</h3>
+          <p>Calculates vendor transaction totals, average values and exposure percentages.</p>
+        </div>
+
+        <div class="detection-card">
+          <span class="coverage-icon green">↻</span>
+          <h3>Payment patterns</h3>
+          <p>Checks repeated payment combinations when transaction dates are available.</p>
+        </div>
+
+      </div>
+
+      <div class="method-note">
+        <span>i</span>
+        <p>Audit findings are risk indicators for human investigation, not proof of fraud.</p>
+      </div>
+    </article>
+
+  </section>
+
+
+  <!-- =================================
+       PAGE 03 — FINDINGS
+  ================================== -->
+
+  <section class="page-view" id="page-findings" data-view="findings">
+
+    <header class="page-heading">
+      <div>
+        <p class="eyebrow">AUDIT INVESTIGATION / 02</p>
+        <h1>Findings register</h1>
+        <p class="muted">
+          Examine flagged transactions, severity and supporting evidence.
+        </p>
+      </div>
+      <span id="findingsCount" class="count-pill">0 findings</span>
+    </header>
+
+    <article class="panel findings-panel">
+
+      <div class="table-tools">
+        <label class="search">
+          <span>⌕</span>
+          <input id="searchFindings" type="search"
+                 placeholder="Search issue, vendor or transaction...">
+        </label>
+
+        <select id="riskFilter" aria-label="Filter by severity">
+          <option value="ALL">All severities</option>
+          <option value="High">High risk</option>
+          <option value="Medium">Medium risk</option>
+          <option value="Low">Low risk</option>
+        </select>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>TRANSACTION / ROW</th>
+              <th>FINDING</th>
+              <th>SEVERITY</th>
+              <th>EVIDENCE</th>
+            </tr>
+          </thead>
+          <tbody id="findingRows">
+            <tr>
+              <td colspan="4" class="empty-cell">
+                Run an audit to see findings here.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-footer">
+        <span id="tableStatus">No audit run yet</span>
+        <span>Human review required</span>
+      </div>
+    </article>
+
+    <div class="page-bottom-action">
+      <span class="muted">Need to analyze another file?</span>
+      <button class="btn secondary" data-go-page="analysis">＋ New analysis</button>
+    </div>
+  </section>
+
+
+  <!-- =================================
+       PAGE 04 — ANALYTICS
+  ================================== -->
+
+  <section class="page-view" id="page-analytics" data-view="analytics">
+
+    <header class="page-heading">
+      <div>
+        <p class="eyebrow">FINANCIAL INTELLIGENCE / 03</p>
+        <h1>Audit analytics</h1>
+        <p class="muted">
+          Review risk distribution, vendor concentration and changes across audit runs.
+        </p>
+      </div>
+    </header>
+
+    <section class="results-grid">
+
+      <article class="panel distribution-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">01 / RISK PROFILE</p>
+            <h2>Finding distribution</h2>
+            <p class="muted">Severity of the latest audit findings</p>
+          </div>
+        </div>
+
+        <div id="riskChart" class="risk-chart">
+          <div class="empty-chart">Run an audit to see your risk profile.</div>
+        </div>
+
+        <div class="chart-foot">
+          <span>Based on current findings</span>
+          <span id="chartTotal">0 findings</span>
+        </div>
+      </article>
+
+      <article class="panel summary-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">02 / AUDIT SUMMARY</p>
+            <h2>Analysis snapshot</h2>
+            <p class="muted">Latest run at a glance</p>
+          </div>
+        </div>
+
+        <div class="summary-row"><span>File analyzed</span><strong id="summaryFileAnalytics">No file yet</strong></div>
+        <div class="summary-row"><span>Records analyzed</span><strong id="summaryRecordsAnalytics">—</strong></div>
+        <div class="summary-row"><span>Total findings</span><strong id="summaryFindingsAnalytics">—</strong></div>
+        <div class="summary-row"><span>Analysis method</span><strong id="summaryMethodAnalytics">Audit rules</strong></div>
+
+        <div class="report-actions">
+          <button id="exportJson" class="btn secondary" disabled>↓ Export JSON</button>
+          <button id="exportCsv" class="btn secondary" disabled>↓ Findings CSV</button>
+        </div>
+      </article>
+
+    </section>
+
+    <article class="panel analytics-panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">03 / VENDOR INTELLIGENCE</p>
+          <h2>Vendor exposure analysis</h2>
+          <p class="muted">Transaction concentration and financial exposure by vendor</p>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>VENDOR</th>
+              <th>TRANSACTIONS</th>
+              <th>TOTAL AMOUNT</th>
+              <th>EXPOSURE</th>
+            </tr>
+          </thead>
+          <tbody id="vendorRows">
+            <tr><td colspan="4" class="empty-cell">Run an audit to analyze vendor exposure.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
+
+    <article class="panel compare-panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">04 / COMPARATIVE INTELLIGENCE</p>
+          <h2>Compare audit runs</h2>
+          <p class="muted">Compare findings across two saved audits</p>
+        </div>
+      </div>
+
+      <div class="compare-fields">
+        <label>
+          First audit
+          <select id="compareFirst">
+            <option value="">Select an audit</option>
+          </select>
+        </label>
+
+        <label>
+          Second audit
+          <select id="compareSecond">
+            <option value="">Select an audit</option>
+          </select>
+        </label>
+      </div>
+
+      <button class="btn primary compare-button" id="compareButton">
+        Compare audit runs →
+      </button>
+
+      <div id="compareResults" class="compare-results" aria-live="polite">
+        Select two saved audits to compare their results.
+      </div>
+    </article>
+
+  </section>
+
+
+  <!-- =================================
+       PAGE 05 — AUDIT HISTORY
+  ================================== -->
+
+  <section class="page-view" id="page-history" data-view="history">
+
+    <header class="page-heading">
+      <div>
+        <p class="eyebrow">PERSISTENT RECORDS / 04</p>
+        <h1>Audit history</h1>
+        <p class="muted">
+          Revisit saved audit runs and reopen their reports.
+        </p>
+      </div>
+
+      <button class="btn secondary" id="refreshHistory">↻ Refresh history</button>
+    </header>
+
+    <article class="panel history-panel">
+
+      <div class="history-intro">
+        <div class="history-icon">◷</div>
+        <div>
+          <h2>Previously completed audits</h2>
+          <p class="muted">
+            Financial audit records stored in your MySQL database.
+          </p>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>AUDIT ID</th>
+              <th>FILE NAME</th>
+              <th>RECORDS</th>
+              <th>FINDINGS</th>
+              <th>STATUS</th>
+              <th>DATE</th>
+              <th>ACTION</th>
+            </tr>
+          </thead>
+          <tbody id="historyRows">
+            <tr>
+              <td colspan="7" class="empty-cell">Loading audit history...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-footer">
+        <span id="historyStatus">Retrieving saved audits...</span>
+        <span>Persistent MySQL records</span>
+      </div>
+    </article>
+
+    <div class="method-note history-note">
+      <span>i</span>
+      <p>Opening a saved audit restores its stored analysis report. It does not rerun the original transaction file.</p>
+    </div>
+
+  </section>
+
+
+  <footer class="footer">
+    <span><b>FinIQ</b> · Intelligent Financial Audit &amp; Risk Detection</span>
+    <span>Audit assistance · Human review required</span>
+  </footer>
+
+</main>
+
+</body>
+</html>
