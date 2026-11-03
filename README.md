@@ -1,4 +1,4 @@
- #  FinIQ — Intelligent Financial Audit & Risk Detection
+  #  FinIQ — Intelligent Financial Audit & Risk Detection
 
 <p align="center">
   <strong>Turning Financial Transactions into Actionable Audit Insights.</strong>
