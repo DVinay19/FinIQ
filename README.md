@@ -1,69 +1,151 @@
+#  FinIQ — Intelligent Financial Audit & Risk Detection
 
-# FinIQ — Intelligent Financial Audit & Risk Detection
+<p align="center">
+  <strong>Turning Financial Transactions into Actionable Audit Insights.</strong>
+  <br/>
+  An intelligent, Java-based financial audit platform for identifying transaction irregularities, detecting unusual payment patterns, and generating structured audit reports.
+</p>
 
-FinIQ is a Java-based financial audit analysis platform that examines uploaded transaction files, identifies potential data-quality and payment irregularities, and generates evidence-backed audit reports.
+<p align="center">
+  <img src="https://img.shields.io/badge/Java-21-orange?style=for-the-badge&logo=openjdk&logoColor=white" />
+  <img src="https://img.shields.io/badge/Spring%20Boot-4-brightgreen?style=for-the-badge&logo=springboot&logoColor=white" />
+  <img src="https://img.shields.io/badge/MySQL-8-blue?style=for-the-badge&logo=mysql&logoColor=white" />
+  <img src="https://img.shields.io/badge/Maven-Build-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white" />
+</p>
 
-## Features
+---
 
-- CSV and Excel (.xlsx/.xlsm) transaction uploads
-- Required-column and data-quality validation
-- Duplicate invoice detection by vendor and invoice reference
-- Repeated-payment pattern screening when transaction dates are supplied
-- Vendor transaction-frequency screening when dates are supplied
-- Vendor exposure and average transaction analysis
-- Unusual amount screening using IQR and modified MAD statistics
-- Risk-labelled findings with row references and explanations
-- MySQL persistence for audit runs and complete report data
-- Reopening previously saved audit reports
-- Audit-run comparison
-- PDF, JSON and findings CSV exports
-- Responsive browser-based audit workspace
+##  Overview
 
-## Technology stack
+**FinIQ** is a financial audit analysis platform designed to simplify the review of transaction records and highlight potentially suspicious financial activities.
+
+The application allows users to upload CSV and Excel transaction files, automatically validates the data, applies statistical and rule-based screening techniques, and generates evidence-backed findings for further investigation.
+
+Rather than relying on manual transaction inspection, FinIQ provides a centralized workspace to analyze financial data, review risk indicators, compare audit runs, and export reports.
+
+##  Key Features
+
+| Feature | Description |
+|---|---|
+|  File Processing | Upload CSV, XLSX and XLSM transaction files |
+|  Data Validation | Detect missing required fields and data-quality issues |
+|  Duplicate Detection | Identify duplicate invoices using vendor and invoice references |
+|  Payment Analysis | Screen repeated-payment patterns when transaction dates are available |
+|  Vendor Analysis | Examine transaction frequency, exposure and average amounts |
+|  Statistical Screening | Identify unusual amounts using IQR and modified MAD |
+|  Risk Classification | Categorize findings with explanations and transaction row references |
+|  Audit History | Persist audit runs and reopen previously saved reports |
+|  Audit Comparison | Compare findings across two saved audit runs |
+|  Report Generation | Export PDF, JSON and findings CSV reports |
+|  Web Dashboard | Access audit operations through a responsive browser interface |
+
+## 🛠️ Technology Stack
 
 | Layer | Technology |
 |---|---|
-| Language | Java 21 |
-| Backend | Spring Boot 4 |
-| Data access | Spring Data JPA / Hibernate |
+| Programming Language | Java 21 |
+| Backend Framework | Spring Boot 4 |
+| Data Access | Spring Data JPA / Hibernate |
 | Database | MySQL 8 |
-| CSV processing | Apache Commons CSV |
-| Excel processing | Apache POI |
-| PDF generation | Apache PDFBox |
-| Frontend | HTML, CSS and JavaScript |
-| Build | Maven |
+| CSV Processing | Apache Commons CSV |
+| Excel Processing | Apache POI |
+| PDF Generation | Apache PDFBox |
+| Frontend | HTML, CSS, JavaScript |
+| Build Tool | Maven |
 
-## Required input columns
+## ⚙️ How FinIQ Works
 
-Every uploaded transaction file must contain:
+```text
+        Transaction File
+          CSV / Excel
+               |
+               ▼
+       File Upload & Parsing
+               |
+               ▼
+        Data Validation
+               |
+               ▼
+       Transaction Analysis
+               |
+       ┌───────┼────────┐
+       ▼       ▼        ▼
+    Duplicate  Payment  Vendor &
+    Detection  Patterns Exposure
+       |       |        |
+       └───────┼────────┘
+               ▼
+       Statistical Screening
+          IQR / MAD
+               |
+               ▼
+        Risk Classification
+               |
+               ▼
+        Audit Findings
+               |
+        ┌──────┼──────┐
+        ▼      ▼      ▼
+       PDF    JSON   CSV
+               |
+               ▼
+        MySQL Audit History
+```
 
-- `transaction_id`
-- `invoice_id`
-- `amount`
-- `vendor`
-- `transaction_type`
+##  Input File Requirements
 
-An optional date column may be named `transaction_date`, `transaction_datetime`, or `date`.
+Every uploaded transaction file must contain the following columns:
 
-Date-dependent payment-pattern and vendor-frequency checks are skipped when no date column exists.
+| Column | Required | Purpose |
+|---|---|---|
+| `transaction_id` | Yes | Unique transaction reference |
+| `invoice_id` | Yes | Invoice identification |
+| `amount` | Yes | Transaction amount |
+| `vendor` | Yes | Vendor identification |
+| `transaction_type` | Yes | Transaction classification |
+| `transaction_date` | Optional | Date-dependent analysis |
 
-## Run locally
+**Supported date column names:**
+- `transaction_date`
+- `transaction_datetime`
+- `date`
+
+Date-dependent payment-pattern and vendor-frequency checks are skipped when no supported date column is available.
+
+A sample transaction file is included in the repository for testing.
+
+##  Getting Started
 
 ### Prerequisites
 
+Make sure the following are installed:
+
 - Java 21
 - MySQL 8
+- Git
 - Windows PowerShell or a compatible terminal
 
-### 1. Create the database
+### 1. Clone the Repository
 
-In MySQL:
+```bash
+git clone https://github.com/DVinay19/FinIQ.git
+```
+
+Navigate into the project:
+
+```bash
+cd FinIQ
+```
+
+### 2. Create the MySQL Database
+
+Open MySQL and execute:
 
 ```sql
 CREATE DATABASE IF NOT EXISTS finiq_db;
 ```
 
-### 2. Configure the database password
+### 3. Configure Database Credentials
 
 From the project root in PowerShell:
 
@@ -71,60 +153,73 @@ From the project root in PowerShell:
 $env:DB_PASSWORD = Read-Host "Enter your MySQL root password"
 ```
 
-### 3. Run automated tests
+### 4. Run Automated Tests
 
 ```powershell
 .\mvnw.cmd clean test
 ```
 
-### 4. Start FinIQ
+### 5. Start the Application
 
 ```powershell
 .\mvnw.cmd spring-boot:run
 ```
 
-### 5. Open the dashboard
+### 6. Open FinIQ
 
-Visit:
+Visit the following URL in your browser:
 
-`http://localhost:8080`
+**http://localhost:8080**
 
-Keep the application terminal open while using the dashboard.
+Keep the application terminal running while using the dashboard.
 
-## API endpoints
+## 🔌 API Endpoints
 
-| Method | Endpoint | Purpose |
+| Method | Endpoint | Description |
 |---|---|---|
-| GET | `/api/health` | Application health |
-| POST | `/api/audit` | Upload and analyze a file |
-| GET | `/api/audit/history` | List saved audits |
-| GET | `/api/audit/history/{id}` | Retrieve a saved report |
-| GET | `/api/audit/history/{id}/pdf` | Download a saved report as PDF |
-| GET | `/api/audit/compare?firstId=1&secondId=2` | Compare two saved audits |
+| GET | `/api/health` | Check application health |
+| POST | `/api/audit` | Upload and analyze transactions |
+| GET | `/api/audit/history` | Retrieve saved audit runs |
+| GET | `/api/audit/history/{id}` | Retrieve a previously saved report |
+| GET | `/api/audit/history/{id}/pdf` | Download an audit report |
+| GET | `/api/audit/compare?firstId=1&secondId=2` | Compare two audit runs |
 
-## Docker deployment
+# Docker Deployment
 
-Create a local `.env` file using `.env.example` as a starting point.
+FinIQ also supports Docker-based deployment.
 
-Set strong local values for:
+### 1. Configure Environment Variables
 
-- `MYSQL_PASSWORD`
-- `MYSQL_ROOT_PASSWORD`
+Create a local `.env` file using `.env.example` as a reference.
 
-Then run:
+Configure:
+
+```env
+MYSQL_PASSWORD=your_database_password
+MYSQL_ROOT_PASSWORD=your_root_password
+```
+
+Use strong local credentials.
+
+### 2. Build and Start
 
 ```powershell
 docker compose up --build
 ```
 
-The dashboard will be available at `http://localhost:8080`.
+Open:
 
-Do not commit the local `.env` file.
+```text
+http://localhost:8080
+```
 
-## Project structure
+**Important:** Never commit your local `.env` file or database credentials to GitHub.
+
+##  Project Structure
 
 ```text
 FinIQ/
+│
 ├── pom.xml
 ├── mvnw
 ├── mvnw.cmd
@@ -134,6 +229,7 @@ FinIQ/
 ├── .gitignore
 ├── README.md
 ├── sample_transactions.csv
+│
 └── src/
     ├── main/
     │   ├── java/com/finiq/
@@ -143,34 +239,67 @@ FinIQ/
     │   │   ├── AuditRunRepository.java
     │   │   ├── AuditService.java
     │   │   └── PdfReportService.java
+    │   │
     │   └── resources/
     │       ├── application.properties
     │       └── static/
     │           ├── index.html
     │           ├── styles.css
     │           └── app.js
+    │
     └── test/
         └── java/com/finiq/
             ├── AuditServiceTest.java
             └── FiniqApplicationTests.java
 ```
 
-## Important limitations
+##  Security & Project Limitations
 
-FinIQ is a portfolio and learning project, not a production-certified audit system.
+FinIQ is a portfolio and learning project. It is not a production-certified financial auditing system.
 
-Rule-based and statistical findings are risk indicators for human review, not proof of fraud. IQR and MAD screening are not a trained fraud-detection model.
+The current implementation has the following limitations:
 
-The application currently does not provide authentication, role-based access, an immutable audit trail, formal retention controls, or production-grade secrets management. These are required before using the platform with confidential company financial records.
+- Statistical and rule-based findings are risk indicators, not proof of fraud.
+- IQR and MAD are statistical screening techniques, not trained machine-learning fraud detection models.
+- Authentication and role-based access control are not currently implemented.
+- An immutable audit trail and formal data-retention controls are not provided.
+- Production-grade secrets management is not included.
 
-## Project purpose
+Additional security controls and validation would be necessary before handling confidential financial records.
 
-- Automate selected financial transaction review tasks
-- Improve visibility into potential irregularities
-- Reduce repetitive manual review work
-- Provide structured findings and downloadable audit reports
-- Demonstrate Java, Spring Boot, SQL and full-stack development skills
+##  Project Objectives
 
-## License
+- Automate selected financial transaction review activities.
+- Identify potential irregularities in financial records.
+- Improve visibility into vendor and payment patterns.
+- Reduce repetitive manual transaction screening.
+- Generate structured, evidence-backed audit reports.
+- Demonstrate practical Java, Spring Boot, SQL and full-stack development skills.
 
-No license has been specified yet. Add a LICENSE file if you intend to distribute this project under an open-source license.
+##  Future Enhancements
+
+Potential improvements include:
+
+- Machine-learning-based anomaly detection.
+- Advanced vendor risk scoring.
+- Interactive financial analytics and visualizations.
+- Authentication and role-based access control.
+- Immutable audit logging.
+- Advanced audit rule configuration.
+- Scheduled transaction analysis.
+
+##  License
+
+No open-source license has been specified yet. A license can be added if the project is intended for open-source distribution.
+
+---
+
+<p align="center">
+  <strong>FinIQ — Making Financial Auditing More Insightful.</strong>
+  <br/>
+  Built with Java, Spring Boot and MySQL.
+</p>
+
+<p align="center">
+  <a href="https://github.com/DVinay19/FinIQ">GitHub Repository</a>
+</p>
